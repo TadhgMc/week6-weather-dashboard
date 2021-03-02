@@ -16,13 +16,25 @@
             </header>
         
 <div class="container-fluid row row-cols-2 text-center justify-content-around">
-        <main class="col-5 justify-content-around g-5">
-            <form class="m-2 col-3 searchForm"> <!--search bar-->
-                <label for="searchBox" class="form-label text-danger">Search by City Name, Zip Code, State Code, or Country Code</label>
-                <input class="form-control form-control-lg" list="datalistOptions" id="searchBox" placeholder="Type to search...">
-                <datalist id="datalistOptions">
-                    <!-- make js to add <options> here of what was previously searched (might not need to, test more) -->
-                </datalist>
+        <main class="row justify-content-around g-5">
+            <form class="row m-2 searchForm row-cols-2 align-items-center">
+                <div class="">
+                    <label class="form-label text-danger" for="searchBox">Search...</label>
+                    <input type="text" class="form-control" id="searchBox" placeholder="Type to search...">
+                    <button type="submit" class="btn btn-danger">Search</button>
+                </div>
+                <div class="col-5">
+                </div>
+                <div class="col-5">
+                    <ul>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                        <button type="submit" class="btn btn-danger">Search</button>
+                    </ul>
+                </div>
             </form>
            
             <div class="card currentDay m-2"> <!--todays weather-->

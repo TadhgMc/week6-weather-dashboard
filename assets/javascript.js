@@ -7,9 +7,6 @@ var thirdDay = $('.3day'); //whole card for third day
 var fourthDay = $('.4day'); //whole card for fourth day
 var fifthDay = $('.5day'); //whole card for fifth day
 
-var checkHere = searchBox.value;
-var weatherUrl = `http://api.openweathermap.org/data/2.5/find?q=${checkHere}&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a`
-
 // open weather api base url http://api.openweathermap.org/ --api key in notepad doc--
 // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 // API DOCS current weather https://openweathermap.org/current
@@ -27,11 +24,18 @@ weather icon <weather.icon>, temp <main.temp>, humidity <main.humidity>, wind sp
 /* will always need date <list.dt>, icon of weather conditions <list.weather.icon>, temp <list.main.temp>, humidity <list.main.humidity> */
 
 
+var checkHere = searchBox.text;
+var weatherUrl = `http://api.openweathermap.org/data/2.5/find?q=${checkHere}&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a`
+console.log(checkHere);
 
-function getWeather (/*can make a variable here be that is then referenced in function*/){
+
+function getWeather (sentUrl){
     //make a check to see if something has been searched before, and get repeat search info from local storage
-    fetch(weatherUrl)
+
+
+    fetch(sentUrl)
     .then(function(response) {
+        console.log(response)
         //return response.json();
     })
     .then(function(data) {
@@ -39,5 +43,5 @@ function getWeather (/*can make a variable here be that is then referenced in fu
     })
 }
 
-//currently just example code
-getWeather(/* here is where to put outside variable that the function variable will point to */); 
+
+searchForm.on("submit", getWeather(weatherUrl)); 
