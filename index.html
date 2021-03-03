@@ -11,28 +11,21 @@
 </head>
 <body class="bg-dark">
     
-            <header class="text-danger row align-self-start"><!--page header-->
-                <h1>Weather Dashboard</h1>
-            </header>
+    <header class="text-danger row align-self-start"><!--page header-->
+        <h1>Weather Dashboard</h1>
+    </header>
         
-<div class="container-fluid row row-cols-2 text-center justify-content-around">
+    <div class="container-fluid row row-cols-2 text-center justify-content-around">
         <main class="row justify-content-around g-5">
             <form class="row m-2 searchForm row-cols-2 align-items-center">
                 <div class="">
-                    <label class="form-label text-danger" for="searchBox">Search...</label>
-                    <input type="text" class="form-control" id="searchBox" placeholder="Type to search...">
-                    <button type="submit" class="btn btn-danger">Search</button>
+                    <label class="form-label text-danger">Search by City Name, Zip Code, State Code, or Country Code</label>
+                    <input type="text" class="form-control searchInput" placeholder="Type to search...">
+                    <button type="submit" class="btn btn-danger searchBtn">Search</button>
                 </div>
-                <div class="col-5">
-                </div>
-                <div class="col-5">
+                <div class="col-6">
                     <ul>
-                        <button type="submit" class="btn btn-danger">Search</button>
-                        <button type="submit" class="btn btn-danger">Search</button>
-                        <button type="submit" class="btn btn-danger">Search</button>
-                        <button type="submit" class="btn btn-danger">Search</button>
-                        <button type="submit" class="btn btn-danger">Search</button>
-                        <button type="submit" class="btn btn-danger">Search</button>
+                        <!-- <button type="submit" class="btn btn-danger visually-hidden">PrevSearch</button> -->
                     </ul>
                 </div>
             </form>
