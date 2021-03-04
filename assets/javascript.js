@@ -1,12 +1,18 @@
-var searchForm = $('.seachForm'); //whole form element with the search bar
-var searchInput = $('.searchInput'); // specific input box for searching cities
-var searchBtn = $('.searchBtn'); //class calling to search button
-var currentDay = $('.currentDay'); //whole card for current day
-var firstDay = $('.1day'); //whole card for first day
-var secondDay = $('.2day'); //whole card for second day
-var thirdDay = $('.3day'); //whole card for third day
-var fourthDay = $('.4day'); //whole card for fourth day
-var fifthDay = $('.5day'); //whole card for fifth day
+const searchForm = $('.seachForm'); //whole form element with the search bar
+const searchInput = $('.searchInput'); // specific input box for searching cities
+const searchBtn = $('.searchBtn'); //class calling to search button
+const currentDay = $('.currentDay'); //whole card for current day
+const firstDay = $('.1day'); //whole card for first day
+const secondDay = $('.2day'); //whole card for second day
+const thirdDay = $('.3day'); //whole card for third day
+const fourthDay = $('.4day'); //whole card for fourth day
+const fifthDay = $('.5day'); //whole card for fifth day
+const searchCity = $('.city'); //city name for current weather card
+const todayDate = $('.today'); //for todays date in current weather card
+const currentIcon = $('.currentIcon');
+const currentTemp = $('.currentTemp');
+const currentHumidity = $('.currentHumidity');
+const currentSpeed = $('.currentSpeed')
 
 // open weather api base url http://api.openweathermap.org/ --api key in notepad doc--
 // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
@@ -35,7 +41,8 @@ function getWeather (){
     //make a check to see if something has been searched before, and get repeat search info from local storage --have the buttons point to their own localstorage
     
     var checkHere = searchInput.val();
-    weatherUrl = "http://api.openweathermap.org/data/2.5/find?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a"
+    weatherUrl = "http://api.openweathermap.org/data/2.5/find?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
+    forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
     console.log(checkHere);
     console.log(weatherUrl);
     
@@ -43,14 +50,29 @@ function getWeather (){
 
     fetch(weatherUrl)
     .then(function (response) {
-        //make if ; if bad response, say so
+        //make if : if bad response, say so
         console.log(response)
         return response.json();
     })
     .then( function (data) {
         console.log(data);
-        console.log(data.list[0].main.temp)
+        console.log(data.list[0].main.temp);
+        currentIcon.text(data.list[0].weather[0].icon);
+        currentTemp.text(data.list[0].main.temp);
+        currentHumidity.text(data.list[0].main.humidity);
+        currentSpeed.text(data.list[0].wind.speed);
+    });
+
+    fetch(forecastUrl)
+    .then(function (response) {
+        //make if : if bad response, say so
+        console.log(response)
+        return response.json();
     })
+    .then( function (data) { //have to use every 8th input to get each day? since it comes in in 3 hour increments
+        console.log(data);
+        console.log(data.list[0]); //can add values to variables that are made outside of function
+    });
 }
 
 
