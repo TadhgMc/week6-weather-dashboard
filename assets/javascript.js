@@ -74,28 +74,28 @@ function getWeather (){
     .then( function (data) { //have to use every 8th input to get each day? since it comes in in 3 hour increments
         console.log(data);
         console.log(data.list[0]); //can add values to variables that are made outside of function
-        $('.1Date').text(moment(data.list[7].dt_txt).format('M/D/YYYY'));
+        $('.1Date').text(moment(data.list[7].dt_txt).format('dddd, M/D/YYYY'));
         $('.1Icon').text(data.list[7].weather.icon);
         $('.1Temp').text(data.list[7].main.temp);
         $('.1Hum').text(data.list[7].main.humidity);
 
-        $('.2Date').text(moment(data.list[14].dt_txt).format('M/D/YYYY'));
+        $('.2Date').text(moment(data.list[14].dt_txt).format('dddd, M/D/YYYY'));
         $('.2Icon').text(data.list[14].weather.icon);
         $('.2Temp').text(data.list[14].main.temp);
         $('.2Hum').text(data.list[14].main.humidity);
 
         
-        $('.3Date').text(moment(data.list[21].dt_txt).format('M/D/YYYY'));
+        $('.3Date').text(moment(data.list[21].dt_txt).format('dddd, M/D/YYYY'));
         $('.3Icon').text(data.list[21].weather.icon);
         $('.3Temp').text(data.list[21].main.temp);
         $('.3Hum').text(data.list[21].main.humidity);
 
-        $('.4Date').text(moment(data.list[28].dt_txt).format('M/D/YYYY'));
+        $('.4Date').text(moment(data.list[28].dt_txt).format('dddd, M/D/YYYY'));
         $('.4Icon').text(data.list[28].weather.icon);
         $('.4Temp').text(data.list[28].main.temp);
         $('.4Hum').text(data.list[28].main.humidity);
 
-        $('.5Date').text(moment(data.list[35].dt_txt).format('M/D/YYYY'));
+        $('.5Date').text(moment(data.list[35].dt_txt).format('dddd, M/D/YYYY'));
         $('.5Icon').text(data.list[35].weather.icon);
         $('.5Temp').text(data.list[35].main.temp);
         $('.5Hum').text(data.list[35].main.humidity);
