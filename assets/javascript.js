@@ -41,8 +41,8 @@ function getWeather (){
     //make a check to see if something has been searched before, and get repeat search info from local storage --have the buttons point to their own localstorage
     
     var checkHere = searchInput.val();
-    weatherUrl = "http://api.openweathermap.org/data/2.5/find?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
-    forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
+    weatherUrl = "https://api.openweathermap.org/data/2.5/find?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
+    forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
     console.log(checkHere);
     console.log(weatherUrl);
     
