@@ -9,73 +9,51 @@ const fourthDay = $('.4day'); //whole card for fourth day
 const fifthDay = $('.5day'); //whole card for fifth day
 const searchCity = $('.city'); //city name for current weather card
 const todayDate = $('.today'); //for todays date in current weather card
-const currentIcon = $('#currentIcon');
-const currentTemp = $('.currentTemp');
-const currentHumidity = $('.currentHumidity');
-const currentSpeed = $('.currentSpeed');
-const searchedBtns = $('.searchedBtns');
+const currentIcon = $('#currentIcon'); // point to html img element 'currentIcon'
+const currentTemp = $('.currentTemp'); // points to temp area of current weather
+const currentHumidity = $('.currentHumidity'); // points to humidity area of current weather
+const currentSpeed = $('.currentSpeed'); // points to wind speed area of current weather
 
-// open weather api base url http://api.openweathermap.org/ --api key in notepad doc--
-// api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
-// API DOCS current weather https://openweathermap.org/current
-//zip code is <zip> ; City name, state code and country code divided by comma <q>
-// http://api.openweathermap.org/data/2.5/find?q=Columbus&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a
-//example of useable url , doesn't appear to be case sensitive
-
-//current day info
-/* will always need cityname <name>, date (Time of data calculation, unix, UTC) (may also need <timezone> for shift in seconds from UTC) <dt>,
-weather icon <weather.icon>, temp <main.temp>, humidity <main.humidity>, wind speed <wind.speed>, UV index (not sure i can get this) */
-
-//forecast info 
-// API DOCS forecasted weather https://openweathermap.org/forecast5
-// example url http://api.openweathermap.org/data/2.5/forecast?q=columbus&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a
-/* will always need date <list.dt>, icon of weather conditions <list.weather.icon>, temp <list.main.temp>, humidity <list.main.humidity> */
-var weatherUrl = "";
+//adds click listener to search button that runs getWeather function
 searchBtn.click(function (event) {
     event.preventDefault();
     getWeather();
 }); 
 
-console.log(searchInput.val());
+
+var weatherUrl = "";
+
 
 function getWeather (){
-    //make a check to see if something has been searched before, and get repeat search info from local storage --have the buttons point to their own localstorage
-    
+    //getting what city is being searched for, and adding it to weather api urls
     var checkHere = searchInput.val();
     weatherUrl = "https://api.openweathermap.org/data/2.5/find?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
     forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+ checkHere +"&units=imperial&appid=096317ae116f5805e156e4177ebd6d5a";
-    console.log(checkHere);
-    console.log(weatherUrl);
     
-    // MAKE ICON WITH <$('#icon').attr('src', `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`);>
-
+    //fetch to get current day weather
     fetch(weatherUrl)
     .then(function (response) {
-        //make if : if bad response, say so
         console.log(response)
         return response.json();
     })
     .then( function (data) {
-        console.log(data);
-        console.log(data.list[0].main.temp);
+        //taking data from weather api and putting it onto the page
         $('.city').text(searchInput.val());
         $('.today').text(moment().format('M/D/YYYY'));
         currentIcon.attr('src', `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`);
         currentTemp.text(data.list[0].main.temp);
         currentHumidity.text(data.list[0].main.humidity);
         currentSpeed.text(data.list[0].wind.speed);
-        console.log(data.list[0].weather[0].icon);
     });
 
+    //fetch to get forecast information
     fetch(forecastUrl)
     .then(function (response) {
-        //make if : if bad response, say so
         console.log(response)
         return response.json();
     })
     .then( function (data) {
-        console.log(data);
-        console.log(data.list[0]);
+        //taking forecast data from api and putting it on the page
         $('.1Date').text(moment(data.list[7].dt_txt).format('dddd, M/D/YYYY'));
         $('.1Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png`);
         $('.1Temp').text(data.list[7].main.temp);
@@ -101,11 +79,7 @@ function getWeather (){
         $('.5Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[35].weather[0].icon}@2x.png`);
         $('.5Temp').text(data.list[35].main.temp);
         $('.5Hum').text(data.list[35].main.humidity);
-         
     });
-    // make 'for' loop for forecast: (i=(~?)6; i<40; i+7) ?
-    
-    
 }
 
 
