@@ -9,10 +9,11 @@ const fourthDay = $('.4day'); //whole card for fourth day
 const fifthDay = $('.5day'); //whole card for fifth day
 const searchCity = $('.city'); //city name for current weather card
 const todayDate = $('.today'); //for todays date in current weather card
-const currentIcon = $('.currentIcon');
+const currentIcon = $('#currentIcon');
 const currentTemp = $('.currentTemp');
 const currentHumidity = $('.currentHumidity');
 const currentSpeed = $('.currentSpeed');
+const searchedBtns = $('.searchedBtns');
 
 // open weather api base url http://api.openweathermap.org/ --api key in notepad doc--
 // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
@@ -46,7 +47,7 @@ function getWeather (){
     console.log(checkHere);
     console.log(weatherUrl);
     
-    
+    // MAKE ICON WITH <$('#icon').attr('src', `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`);>
 
     fetch(weatherUrl)
     .then(function (response) {
@@ -59,10 +60,11 @@ function getWeather (){
         console.log(data.list[0].main.temp);
         $('.city').text(searchInput.val());
         $('.today').text(moment().format('M/D/YYYY'));
-        currentIcon.text(data.list[0].weather[0].icon);
+        currentIcon.attr('src', `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`);
         currentTemp.text(data.list[0].main.temp);
         currentHumidity.text(data.list[0].main.humidity);
         currentSpeed.text(data.list[0].wind.speed);
+        console.log(data.list[0].weather[0].icon);
     });
 
     fetch(forecastUrl)
@@ -71,37 +73,35 @@ function getWeather (){
         console.log(response)
         return response.json();
     })
-    .then( function (data) { //have to use every 8th input to get each day? since it comes in in 3 hour increments
+    .then( function (data) {
         console.log(data);
-        console.log(data.list[0]); //can add values to variables that are made outside of function
+        console.log(data.list[0]);
         $('.1Date').text(moment(data.list[7].dt_txt).format('dddd, M/D/YYYY'));
-        $('.1Icon').text(data.list[7].weather.icon);
+        $('.1Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png`);
         $('.1Temp').text(data.list[7].main.temp);
         $('.1Hum').text(data.list[7].main.humidity);
 
         $('.2Date').text(moment(data.list[14].dt_txt).format('dddd, M/D/YYYY'));
-        $('.2Icon').text(data.list[14].weather.icon);
+        $('.2Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[14].weather[0].icon}@2x.png`);
         $('.2Temp').text(data.list[14].main.temp);
         $('.2Hum').text(data.list[14].main.humidity);
 
         
         $('.3Date').text(moment(data.list[21].dt_txt).format('dddd, M/D/YYYY'));
-        $('.3Icon').text(data.list[21].weather.icon);
+        $('.3Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[21].weather[0].icon}@2x.png`);
         $('.3Temp').text(data.list[21].main.temp);
         $('.3Hum').text(data.list[21].main.humidity);
 
         $('.4Date').text(moment(data.list[28].dt_txt).format('dddd, M/D/YYYY'));
-        $('.4Icon').text(data.list[28].weather.icon);
+        $('.4Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[28].weather[0].icon}@2x.png`);
         $('.4Temp').text(data.list[28].main.temp);
         $('.4Hum').text(data.list[28].main.humidity);
 
         $('.5Date').text(moment(data.list[35].dt_txt).format('dddd, M/D/YYYY'));
-        $('.5Icon').text(data.list[35].weather.icon);
+        $('.5Icon').attr('src', `https://openweathermap.org/img/wn/${data.list[35].weather[0].icon}@2x.png`);
         $('.5Temp').text(data.list[35].main.temp);
         $('.5Hum').text(data.list[35].main.humidity);
          
-
-
     });
     // make 'for' loop for forecast: (i=(~?)6; i<40; i+7) ?
     
